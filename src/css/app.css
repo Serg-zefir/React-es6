@@ -1,0 +1,19 @@
+.founds{
+    margin-top: 64px;
+    margin-left: 25%;
+}
+.Stabl {
+    margin-top: 5px;
+    margin-left: 5%;
+    display: flex;
+    flex-flow: row wrap;
+}
+.film {
+    vertical-align: bottom;
+    display: inline-block;
+    margin: 10px 20px 10px 20px;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 7px 7px rgba(0,0,0,.28);
+}
+/*.poster{
+    width: 225px;
+}*/
