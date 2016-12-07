@@ -4,7 +4,9 @@ import styles from './css/index.css';
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { form: { s: '', y: '', type: ''} };
+		this.state = { 
+			form: { s: '', y: '', type: ''}
+		};
 		this.bindState = this.bindState.bind(this);
     	this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -22,14 +24,15 @@ class Search extends React.Component {
 				if(data[key] !== ''){
 					if(request.length>3) request +='&';
 					var str = key +'='+ data[key];
-					console.log('str#:', request.length);
+					// console.log('str#:', request.length);
 					request += str;
 				}
-				else console.log('hop:', key);
+				// else console.log('hop:', key);
 				// console.log('key:', key);
 				// console.log('req:', request);
 			}
-			console.log('req:', request);
+			console.log('req1:', request);
+			this.props.onSubmit(request);
 		}
         // var request = "s="
         // console.log('SEARCHform:', this.state.form.s, this.state.form.y, this.state.form.type); //JSON.stringify(event.target));

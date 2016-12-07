@@ -1,85 +1,44 @@
 import React from 'react';
 import Search from './Search';
-import Styl from './css/app.css';
+import FilmList from './FilmList';
 
 class App extends React.Component {
-	constructor() {
-		super();
-		this.props.totalResults;
+	constructor(props) {
+		super(props);
 		this.state = {
-			films: []
-		}
+			films: [],
+			totalRes: 0
+		};
+		this.getData = this.getData.bind(this);
 	}
-	componentWillMount() {
-		// var c = $('#sbt-form').serialize();
-		// 	console.log("c:", c); // .then( ({results: films}) => this.setState({films}) )
-		var c = 's=batman&y=2015&type=movie';
-		var d = 'http://www.omdbapi.com/?' + c;
-		console.log("d:", d);
-		fetch(d)
-			.then(response => response.json()
-			// {
-			// 	alert(response.status);
-			// 	var k=response.json();
-			// 	console.log("res:", JSON.stringify(response), k)
-			// } this.setState(data.Search)
-			)
+	getData(val) {
+		// var lohj = Search.state.req;
+		console.log('req2', val);
+		// var c = 's=batman&y=2015&type=movie';
+		var url1 = 'http://www.omdbapi.com/?' + val;
+		// console.log("d:", url1);
+		fetch(url1)
+			.then(response => response.json())
 			.then(data => {
 				this.setState({ films: data.Search });
-				this.props.totalResults = data.totalResults;
+				this.setState({ totalRes: data.totalResults });
+				// console.log('data', data.totalResults,'props', this.props.totalResults);
 			})
 	}
-	// update (e){
-	// 	this.setState({txt:e.target.value})
-	// }
-	// setPoster(purl: string) {
-	// 	let stls = {
-	// 		'background-image': (purl == 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + purl + '), url("images/pstr_na.jpg")'
-	// 	};
-	// 	return stls;
-	// }
 	render() {
-		let films = this.state.films;
-		var Films;
-		Films = films.map(item => {
-			return (
-					<Film key={item.imdbID} film={item} />
-			)
-		})
+		var resdata = this.state;
+		// console.log('LOGGER:', films);
 		return (
 			<div className="Root">
-				<Search />
-				<p className="founds">Results found: {this.props.totalResults}</p>
-				<div className="Stabl row">
-					{Films}
-				</div>
+				<Search onSubmit={this.getData}/>
+				<FilmList films={resdata}/>
 			</div>
 		);
 	}
 };
-class Film extends React.Component {
-	render() {
-		var title = this.props.film.Title,
-			type = this.props.film.Type,
-			year = this.props.film.Year,
-			poster = this.props.film.Poster;
-		const pstr = {
-			backgroundSize: 'cover',
-			maxWidth: '222px',
-			height: ' 320px',
-			backgroundImage: (poster === 'N/A') ? 'url("images/pstr_na.jpg")' : 'url(' + poster + '), url("images/pstr_na.jpg")'
-		};
-		return (
-			<div className="film col-sm-6 col-md-3">
-				<div className="poster" style={pstr}></div>
-				<div>
-					<h3 className="title">{title}</h3>
-					<span>{type}, {year}</span>
-				</div>
-			</div>
-		)
-	}
-}
+
+export default App;
+
 // {films.map(film => <span>{film.Title}</span>)}
 // const Widget =(props) =>
 // 	<input type="text" name="txt" onChange={props.update}/>
@@ -91,5 +50,3 @@ class Film extends React.Component {
 // App.defaultProps = {
 // 	txt: "moto undead"
 // }
-
-export default App;
