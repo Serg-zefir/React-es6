@@ -5,6 +5,7 @@ import Styl from './css/app.css';
 class App extends React.Component {
 	constructor() {
 		super();
+		this.props.totalResults;
 		this.state = {
 			films: []
 		}
@@ -23,7 +24,10 @@ class App extends React.Component {
 			// 	console.log("res:", JSON.stringify(response), k)
 			// } this.setState(data.Search)
 			)
-			.then(data => this.setState({ films: data.Search }))
+			.then(data => {
+				this.setState({ films: data.Search });
+				this.props.totalResults = data.totalResults;
+			})
 	}
 	// update (e){
 	// 	this.setState({txt:e.target.value})
@@ -45,7 +49,7 @@ class App extends React.Component {
 		return (
 			<div className="Root">
 				<Search />
-				<p className="founds">Results found:</p>
+				<p className="founds">Results found: {this.props.totalResults}</p>
 				<div className="Stabl row">
 					{Films}
 				</div>
