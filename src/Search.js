@@ -13,7 +13,6 @@ class Search extends React.Component {
     bindState(event) {
          var p = this.state.form;
 		 p[event.target.name] = event.target.value;
-		//  console.log('p:', p);
 		 this.setState({form: p});
     }
     onSubmit(event) {
@@ -24,20 +23,13 @@ class Search extends React.Component {
 				if(data[key] !== ''){
 					if(request.length>3) request +='&';
 					var str = key +'='+ data[key];
-					// console.log('str#:', request.length);
 					request += str;
 				}
-				// else console.log('hop:', key);
-				// console.log('key:', key);
-				// console.log('req:', request);
 			}
-			console.log('req1:', request);
+			// console.log('req1:', request);
 			this.props.onSubmit(request);
 		}
-        // var request = "s="
-        // console.log('SEARCHform:', this.state.form.s, this.state.form.y, this.state.form.type); //JSON.stringify(event.target));
-        event.preventDefault();
-		// this.setState({form: { s: '', y: '', type: ''}});
+		event.preventDefault();
     }
     render() {
         return (

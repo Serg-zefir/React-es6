@@ -4,26 +4,6 @@ import Styl from './css/filmList.css';
 class FilmList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			films: [],
-			totalRes: 0
-		}
-	}
-	componentWillMount() {
-		// var c = 's=batman&y=2015&type=movie';
-		// var d = 'http://www.omdbapi.com/?' + c;
-		// // console.log("d:", d);
-		// fetch(d)
-		// 	.then(response => response.json())
-		// 	.then(data => {
-		// 		this.setState({ films: data.Search });
-		// 		this.setState({ totalRes: data.totalResults });
-		// 		// console.log('data', data.totalResults,'props', this.props.totalResults);
-		// 	})
-		// if(this.props.resdata){
-		// 	this.setState({ films: this.props.resdata.films });
-		// 	this.setState({ totalRes: this.props.resdata.totalRes });
-		// }
 	}
 	render() {
 		let films = this.props.resdata? this.props.resdata.films : null;
@@ -38,7 +18,7 @@ class FilmList extends React.Component {
 		}
 		return (
 			<div className="Films">
-				<p className="founds">Results found: {tR}</p>
+				<p className="founds">Results found: {this.props.resdata && this.props.resdata.totalRes}</p>
 				<div className="Stabl row">
 					{Films}
 				</div>
